@@ -1,0 +1,1 @@
+C:\code\inventory\inventory\bin\Debug\inventory.exe.config
