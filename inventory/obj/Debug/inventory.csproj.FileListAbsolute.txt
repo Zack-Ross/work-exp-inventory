@@ -1,1 +1,9 @@
 C:\code\inventory\inventory\bin\Debug\inventory.exe.config
+C:\code\inventory\inventory\bin\Debug\inventory.exe
+C:\code\inventory\inventory\bin\Debug\inventory.pdb
+C:\code\inventory\inventory\obj\Debug\inventory.csprojResolveAssemblyReference.cache
+C:\code\inventory\inventory\obj\Debug\inventory.Form1.resources
+C:\code\inventory\inventory\obj\Debug\inventory.Properties.Resources.resources
+C:\code\inventory\inventory\obj\Debug\inventory.csproj.GenerateResource.Cache
+C:\code\inventory\inventory\obj\Debug\inventory.exe
+C:\code\inventory\inventory\obj\Debug\inventory.pdb
