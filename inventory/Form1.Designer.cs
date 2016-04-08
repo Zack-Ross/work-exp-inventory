@@ -47,21 +47,21 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSaveFile = new System.Windows.Forms.Button();
+            this.btnLoadFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtBarcode
             // 
             this.txtBarcode.Location = new System.Drawing.Point(766, 73);
             this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(61, 20);
+            this.txtBarcode.Size = new System.Drawing.Size(75, 20);
             this.txtBarcode.TabIndex = 1;
             // 
             // lblBarcode
             // 
             this.lblBarcode.AutoSize = true;
-            this.lblBarcode.Location = new System.Drawing.Point(702, 73);
+            this.lblBarcode.Location = new System.Drawing.Point(691, 76);
             this.lblBarcode.Name = "lblBarcode";
             this.lblBarcode.Size = new System.Drawing.Size(47, 13);
             this.lblBarcode.TabIndex = 2;
@@ -71,14 +71,14 @@
             // 
             this.txtModelNumber.Location = new System.Drawing.Point(766, 99);
             this.txtModelNumber.Name = "txtModelNumber";
-            this.txtModelNumber.Size = new System.Drawing.Size(69, 20);
+            this.txtModelNumber.Size = new System.Drawing.Size(75, 20);
             this.txtModelNumber.TabIndex = 3;
             // 
             // txtSerialNumber
             // 
             this.txtSerialNumber.Location = new System.Drawing.Point(766, 125);
             this.txtSerialNumber.Name = "txtSerialNumber";
-            this.txtSerialNumber.Size = new System.Drawing.Size(72, 20);
+            this.txtSerialNumber.Size = new System.Drawing.Size(75, 20);
             this.txtSerialNumber.TabIndex = 4;
             // 
             // txtManufacturer
@@ -91,7 +91,7 @@
             // lblModelNumber
             // 
             this.lblModelNumber.AutoSize = true;
-            this.lblModelNumber.Location = new System.Drawing.Point(684, 102);
+            this.lblModelNumber.Location = new System.Drawing.Point(690, 102);
             this.lblModelNumber.Name = "lblModelNumber";
             this.lblModelNumber.Size = new System.Drawing.Size(76, 13);
             this.lblModelNumber.TabIndex = 7;
@@ -100,7 +100,7 @@
             // lblSerialNumber
             // 
             this.lblSerialNumber.AutoSize = true;
-            this.lblSerialNumber.Location = new System.Drawing.Point(687, 132);
+            this.lblSerialNumber.Location = new System.Drawing.Point(690, 128);
             this.lblSerialNumber.Name = "lblSerialNumber";
             this.lblSerialNumber.Size = new System.Drawing.Size(73, 13);
             this.lblSerialNumber.TabIndex = 8;
@@ -118,7 +118,7 @@
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(700, 200);
+            this.lblDescription.Location = new System.Drawing.Point(691, 200);
             this.lblDescription.Name = "lblDescription";
             this.lblDescription.Size = new System.Drawing.Size(60, 13);
             this.lblDescription.TabIndex = 10;
@@ -177,13 +177,13 @@
             this.txtID.Location = new System.Drawing.Point(766, 47);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(61, 20);
+            this.txtID.Size = new System.Drawing.Size(75, 20);
             this.txtID.TabIndex = 13;
             // 
             // lblID
             // 
             this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(725, 50);
+            this.lblID.Location = new System.Drawing.Point(691, 50);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(24, 13);
             this.lblID.TabIndex = 14;
@@ -195,35 +195,36 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 15;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "Update Item";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button1
+            // btnSaveFile
             // 
-            this.button1.Location = new System.Drawing.Point(490, 349);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSaveFile.Location = new System.Drawing.Point(93, 349);
+            this.btnSaveFile.Name = "btnSaveFile";
+            this.btnSaveFile.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveFile.TabIndex = 16;
+            this.btnSaveFile.Text = "Save File";
+            this.btnSaveFile.UseVisualStyleBackColor = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
             // 
-            // button2
+            // btnLoadFile
             // 
-            this.button2.Location = new System.Drawing.Point(395, 350);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Location = new System.Drawing.Point(12, 349);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadFile.TabIndex = 17;
+            this.btnLoadFile.Text = "Load File";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 380);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLoadFile);
+            this.Controls.Add(this.btnSaveFile);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.txtID);
@@ -266,8 +267,8 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSaveFile;
+        private System.Windows.Forms.Button btnLoadFile;
     }
 }
 

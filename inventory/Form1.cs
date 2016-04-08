@@ -108,5 +108,23 @@ namespace inventory
             }
 
         }
+
+        private void btnSaveFile_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "inventory files (*.inventory)|*.inventory|All files (*.*)|*.*";
+
+            DialogResult saveDialogResult = saveFileDialog1.ShowDialog();
+
+            if (saveDialogResult == DialogResult.OK)
+            {
+                Filename = saveFileDialog1.FileName;
+                
+            }
+            else if (saveDialogResult == DialogResult.Cancel)
+            {
+            }
+        }
     }
 }
