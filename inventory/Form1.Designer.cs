@@ -39,11 +39,11 @@
             this.lblDescription = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.lstInventory = new System.Windows.Forms.ListView();
+            this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colManufacturer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colModelNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSerialNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colBarcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtID = new System.Windows.Forms.TextBox();
             this.lblID = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
@@ -148,6 +148,10 @@
             this.lstInventory.View = System.Windows.Forms.View.Details;
             this.lstInventory.SelectedIndexChanged += new System.EventHandler(this.lstInventory_SelectedIndexChanged);
             // 
+            // colID
+            // 
+            this.colID.Text = "I.D.";
+            // 
             // colManufacturer
             // 
             this.colManufacturer.Text = "Manufacturer";
@@ -167,10 +171,6 @@
             // 
             this.colBarcode.Text = "Barcode";
             this.colBarcode.Width = 171;
-            // 
-            // colID
-            // 
-            this.colID.Text = "I.D.";
             // 
             // txtID
             // 
@@ -217,6 +217,7 @@
             this.btnLoadFile.TabIndex = 17;
             this.btnLoadFile.Text = "Load File";
             this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // Form1
             // 

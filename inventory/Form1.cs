@@ -26,13 +26,6 @@ namespace inventory
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            InventoryItem Item1 = new InventoryItem(0, "1", "2", "3", "HID");
-            Item1.Description = "Color Ribbion";
-
-            
-            AllInventoryItems.Add(Item1);
-            AllInventoryItems.Add(new InventoryItem(1, "2", "4", "6", "DIH"));
-
             UpdateListBox();
         }
 
@@ -128,12 +121,55 @@ namespace inventory
                 {
                     Filename += FileExtention;
                 }
-                FileStream fs = new FileStream(Filename, FileMode.Create);
-                FileHelper.Save(fs, AllInventoryItems);
-                fs.Close();
+                try
+                {
+                    FileStream fs = new FileStream(Filename, FileMode.Create);
+                    FileHelper.Save(fs, AllInventoryItems);
+                    fs.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message, "Save error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (saveDialogResult == DialogResult.Cancel)
             {
+            }
+        }
+
+        private void btnLoadFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Inventory File|*" + FileExtention;
+
+            DialogResult loadDialogResult = openFileDialog1.ShowDialog();
+
+            if (loadDialogResult == DialogResult.OK)
+            {
+                if (!string.IsNullOrEmpty(openFileDialog1.FileName))
+                {
+                    Filename = openFileDialog1.FileName;
+
+                    try
+                    {
+                        FileStream fs = new FileStream(Filename, FileMode.Open);
+                        List<InventoryItem> tempItems = new List<InventoryItem>();
+                        tempItems = FileHelper.Load(fs);
+                        fs.Close();
+                        if (tempItems != null)
+                        {
+                            if (tempItems.Count > 0)
+                            {
+                                AllInventoryItems = tempItems;
+                                UpdateListBox();
+                            }
+                        }                      
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occured: " + ex.Message, "Load error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
     }
