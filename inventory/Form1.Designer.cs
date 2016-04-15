@@ -46,9 +46,9 @@
             this.colBarcode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtID = new System.Windows.Forms.TextBox();
             this.lblID = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveFile = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtBarcode
@@ -189,16 +189,6 @@
             this.lblID.TabIndex = 14;
             this.lblID.Text = "I.D.";
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(833, 350);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 15;
-            this.btnSave.Text = "Update Item";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // btnSaveFile
             // 
             this.btnSaveFile.Location = new System.Drawing.Point(93, 349);
@@ -219,14 +209,24 @@
             this.btnLoadFile.UseVisualStyleBackColor = true;
             this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Location = new System.Drawing.Point(833, 349);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(75, 23);
+            this.btnAddItem.TabIndex = 18;
+            this.btnAddItem.Text = "Add Item";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 380);
+            this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.btnSaveFile);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.lstInventory);
@@ -267,9 +267,9 @@
         private System.Windows.Forms.ColumnHeader colID;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label lblID;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveFile;
         private System.Windows.Forms.Button btnLoadFile;
+        private System.Windows.Forms.Button btnAddItem;
     }
 }
 

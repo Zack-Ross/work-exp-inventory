@@ -65,22 +65,9 @@ namespace inventory
                 {
 
                     InventoryItem FoundItem = DisplayedItemsWithIndex[SelectedIndex];
-
-
-                    UpdateItemFields(FoundItem);
                 }
             }
         }
-        private void UpdateItemFields(InventoryItem item)
-        {
-            txtID.Text = item.ID.ToString();
-            txtBarcode.Text = item.Barcode;
-            txtModelNumber.Text = item.ModelNumber;
-            txtSerialNumber.Text = item.SerialNumber;
-            txtManufacturer.Text = item.Manufacturer;
-            txtDescription.Text = item.Description;
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             int SelectedItem = 0;
@@ -171,6 +158,30 @@ namespace inventory
                     }
                 }
             }
+        }
+        private string Sanatize(string str)
+        {
+            return str.Trim();
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            string manufacturer = Sanatize(txtManufacturer.Text);
+            string modelnumber = Sanatize(txtModelNumber.Text);
+            string serialnumber = Sanatize(txtSerialNumber.Text);
+            string barcode = Sanatize(txtBarcode.Text);
+            string description = Sanatize(txtDescription.Text);
+
+            InventoryItem newItem = new InventoryItem()
+            {
+                Manufacturer = manufacturer,
+                ModelNumber = modelnumber,
+                SerialNumber = serialnumber,
+                Barcode = barcode,
+                Description = description
+            };
+            AllInventoryItems.Add(newItem);
+            UpdateListBox();
         }
     }
 }
