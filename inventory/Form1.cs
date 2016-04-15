@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace inventory
     public partial class Form1 : Form
     {
         private string Filename;
+        private const string FileExtention = ".inventory";
         private Dictionary<int, InventoryItem> DisplayedItemsWithIndex;
         private List<InventoryItem> AllInventoryItems;
         public Form1()
@@ -111,16 +113,24 @@ namespace inventory
 
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
+            Filename = "File" + FileHelper.TimeStamp() + FileExtention;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
-            saveFileDialog1.Filter = "inventory files (*.inventory)|*.inventory|All files (*.*)|*.*";
+            saveFileDialog1.FileName = Filename;
+            saveFileDialog1.Filter = "inventory files (*" + FileExtention + ")|*.inventory|All files (*.*)|*.*";
 
             DialogResult saveDialogResult = saveFileDialog1.ShowDialog();
 
             if (saveDialogResult == DialogResult.OK)
             {
                 Filename = saveFileDialog1.FileName;
-                
+
+                if (!Filename.EndsWith(FileExtention))
+                {
+                    Filename += FileExtention;
+                }
+                FileStream fs = new FileStream(Filename, FileMode.Create);
+                FileHelper.Save(fs, AllInventoryItems);
+                fs.Close();
             }
             else if (saveDialogResult == DialogResult.Cancel)
             {
