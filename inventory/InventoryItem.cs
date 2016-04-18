@@ -15,14 +15,18 @@ namespace inventory
         public string Description;
         public float WeightInGrams;
         public int ID;
+        public decimal Cost;
+        public decimal Price;
 
-        public InventoryItem(int ID, string Barcode, string ModelNumber, string SerialNumber, string Manufacturer)
+        public InventoryItem(int ID, string Barcode, string ModelNumber, string SerialNumber, string Manufacturer, decimal Cost, Decimal Price)
         {
             this.Barcode = Barcode;
             this.ModelNumber = ModelNumber;
             this.SerialNumber = SerialNumber;
             this.Manufacturer = Manufacturer;
             this.ID = ID;
+            this.Cost = Cost;
+            this.Price = Price;
         }
 
         public InventoryItem()

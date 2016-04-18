@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,15 +11,15 @@ namespace inventory
 {
     static class FileHelper
     {
-        public static List<InventoryItem> Load(FileStream file)
+        public static ObservableCollection<InventoryItem> Load(FileStream file)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<InventoryItem>));
-            List<InventoryItem> returnMe = (List<InventoryItem>)serializer.Deserialize(file);
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<InventoryItem>));
+            ObservableCollection<InventoryItem> returnMe = (ObservableCollection<InventoryItem>)serializer.Deserialize(file);
             return returnMe;
         }
-        public static void Save(FileStream file, List<InventoryItem> items)
+        public static void Save(FileStream file, ObservableCollection<InventoryItem> items)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<InventoryItem>));
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<InventoryItem>));
             serializer.Serialize(file, items);
         }
         public static string TimeStamp()

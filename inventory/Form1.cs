@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -16,13 +17,20 @@ namespace inventory
         private string Filename;
         private const string FileExtention = ".inventory";
         private Dictionary<int, InventoryItem> DisplayedItemsWithIndex;
-        private List<InventoryItem> AllInventoryItems;
+        private ObservableCollection<InventoryItem> AllInventoryItems;
         public static InventoryItem SelectedItem;
+        
         public Form1()
         {
             InitializeComponent();
             DisplayedItemsWithIndex = new Dictionary<int, InventoryItem>();
-            AllInventoryItems = new List<InventoryItem>();
+            AllInventoryItems = new ObservableCollection<InventoryItem>();
+            AllInventoryItems.CollectionChanged += ListUpdateHandler;
+            
+        }
+        private void ListUpdateHandler(object sender, EventArgs e)
+        {
+            UpdateListBox();
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -50,6 +58,9 @@ namespace inventory
             lvi.SubItems.Add(item.ModelNumber);
             lvi.SubItems.Add(item.SerialNumber);
             lvi.SubItems.Add(item.Barcode);
+            lvi.SubItems.Add(item.Cost.ToString());
+            lvi.SubItems.Add(item.Price.ToString());
+
             return lvi;
         }
 
@@ -68,33 +79,12 @@ namespace inventory
                     if (SelectedItem != null)
                     {
                         btnEditItem.Enabled = true;
+                        btnRemoveItem.Enabled = true;
                     }
                 }
             }
         }
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            int SelectedItem = 0;
-            if (!string.IsNullOrEmpty(txtID.Text))
-            {
-                SelectedItem = int.Parse(txtID.Text);
-                foreach (InventoryItem item in AllInventoryItems)
-                {
-                    if(item.ID == SelectedItem)
-                    {
-                        item.Barcode = txtBarcode.Text;
-                        item.ModelNumber = txtModelNumber.Text;
-                        item.SerialNumber = txtSerialNumber.Text;
-                        item.Manufacturer = txtManufacturer.Text;
-                        item.Description = txtDescription.Text;
-                        UpdateListBox();
-                        
-                    }
-                }
-            }
-
-        }
-
+        
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
             Filename = "File" + FileHelper.TimeStamp() + FileExtention;
@@ -144,7 +134,7 @@ namespace inventory
                     try
                     {
                         FileStream fs = new FileStream(Filename, FileMode.Open);
-                        List<InventoryItem> tempItems = new List<InventoryItem>();
+                        ObservableCollection<InventoryItem> tempItems = new ObservableCollection<InventoryItem>();
                         tempItems = FileHelper.Load(fs);
                         fs.Close();
                         if (tempItems != null)
@@ -163,18 +153,18 @@ namespace inventory
                 }
             }
         }
-        private string Sanatize(string str)
-        {
-            return str.Trim();
-        }
+        
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            string manufacturer = Sanatize(txtManufacturer.Text);
-            string modelnumber = Sanatize(txtModelNumber.Text);
-            string serialnumber = Sanatize(txtSerialNumber.Text);
-            string barcode = Sanatize(txtBarcode.Text);
-            string description = Sanatize(txtDescription.Text);
+            Sanatizers sanatizer = new Sanatizers();
+            string manufacturer = sanatizer.Sanatize(txtManufacturer.Text);
+            string modelnumber = sanatizer.Sanatize(txtModelNumber.Text);
+            string serialnumber = sanatizer.Sanatize(txtSerialNumber.Text);
+            string barcode = sanatizer.Sanatize(txtBarcode.Text);
+            string description = sanatizer.Sanatize(txtDescription.Text);
+            decimal cost = Parsers.ParseDecimal(sanatizer.Sanatize(txtCost.Text));
+            decimal price = Parsers.ParseDecimal(sanatizer.Sanatize(txtPrice.Text));
 
             InventoryItem newItem = new InventoryItem()
             {
@@ -182,16 +172,21 @@ namespace inventory
                 ModelNumber = modelnumber,
                 SerialNumber = serialnumber,
                 Barcode = barcode,
-                Description = description
+                Description = description,
+                Cost = cost,
+                Price = price
+                
             };
             AllInventoryItems.Add(newItem);
+            ClearTextBoxes();
             UpdateListBox();
+            
         }
 
         private void btnEditItem_Click(object sender, EventArgs e)
         {
             Edit_Item_Form EditForm = new Edit_Item_Form();
-            EditForm.Show();
+            EditForm.Show(this);
 
         }
 
@@ -199,5 +194,26 @@ namespace inventory
         {
             UpdateListBox();
         }
-    }
-}
+
+        private void btnRemoveItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedItem != null)
+            {
+                AllInventoryItems.Remove(SelectedItem);
+                UpdateListBox();
+            }
+        }
+
+        private void ClearTextBoxes()
+        {
+            txtBarcode.Text = "";
+            txtCost.Text = "";
+            txtDescription.Text = "";
+            txtManufacturer.Text = "";
+            txtModelNumber.Text = "";
+            txtPrice.Text = "";
+            txtSerialNumber.Text = "";
+            
+        }
+    } //class
+} //namespace
