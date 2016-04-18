@@ -7,3 +7,4 @@ C:\code\inventory\inventory\obj\Debug\inventory.Properties.Resources.resources
 C:\code\inventory\inventory\obj\Debug\inventory.csproj.GenerateResource.Cache
 C:\code\inventory\inventory\obj\Debug\inventory.exe
 C:\code\inventory\inventory\obj\Debug\inventory.pdb
+C:\code\inventory\inventory\obj\Debug\inventory.Edit_Item_Form.resources

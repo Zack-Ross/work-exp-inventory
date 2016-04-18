@@ -17,6 +17,7 @@ namespace inventory
         private const string FileExtention = ".inventory";
         private Dictionary<int, InventoryItem> DisplayedItemsWithIndex;
         private List<InventoryItem> AllInventoryItems;
+        public static InventoryItem SelectedItem;
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace inventory
             UpdateListBox();
         }
 
-        private void UpdateListBox()
+        public void UpdateListBox()
         {
             lstInventory.Items.Clear();
             DisplayedItemsWithIndex.Clear();
@@ -63,8 +64,11 @@ namespace inventory
                 }
                 if (DisplayedItemsWithIndex.ContainsKey(SelectedIndex))
                 {
-
-                    InventoryItem FoundItem = DisplayedItemsWithIndex[SelectedIndex];
+                    SelectedItem = DisplayedItemsWithIndex[SelectedIndex];
+                    if (SelectedItem != null)
+                    {
+                        btnEditItem.Enabled = true;
+                    }
                 }
             }
         }
@@ -181,6 +185,18 @@ namespace inventory
                 Description = description
             };
             AllInventoryItems.Add(newItem);
+            UpdateListBox();
+        }
+
+        private void btnEditItem_Click(object sender, EventArgs e)
+        {
+            Edit_Item_Form EditForm = new Edit_Item_Form();
+            EditForm.Show();
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
             UpdateListBox();
         }
     }

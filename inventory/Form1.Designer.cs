@@ -49,6 +49,8 @@
             this.btnSaveFile = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
+            this.btnEditItem = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtBarcode
@@ -142,7 +144,7 @@
             this.colBarcode});
             this.lstInventory.Location = new System.Drawing.Point(12, 12);
             this.lstInventory.Name = "lstInventory";
-            this.lstInventory.Size = new System.Drawing.Size(673, 327);
+            this.lstInventory.Size = new System.Drawing.Size(673, 331);
             this.lstInventory.TabIndex = 12;
             this.lstInventory.UseCompatibleStateImageBehavior = false;
             this.lstInventory.View = System.Windows.Forms.View.Details;
@@ -219,11 +221,34 @@
             this.btnAddItem.UseVisualStyleBackColor = true;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
+            // btnEditItem
+            // 
+            this.btnEditItem.Enabled = false;
+            this.btnEditItem.Location = new System.Drawing.Point(610, 349);
+            this.btnEditItem.Name = "btnEditItem";
+            this.btnEditItem.Size = new System.Drawing.Size(75, 23);
+            this.btnEditItem.TabIndex = 19;
+            this.btnEditItem.Text = "Edit Item";
+            this.btnEditItem.UseVisualStyleBackColor = true;
+            this.btnEditItem.Click += new System.EventHandler(this.btnEditItem_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(518, 349);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 20;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(920, 380);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnEditItem);
             this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.btnSaveFile);
@@ -270,6 +295,8 @@
         private System.Windows.Forms.Button btnSaveFile;
         private System.Windows.Forms.Button btnLoadFile;
         private System.Windows.Forms.Button btnAddItem;
+        private System.Windows.Forms.Button btnEditItem;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
 
