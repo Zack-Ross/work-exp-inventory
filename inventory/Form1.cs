@@ -40,16 +40,30 @@ namespace inventory
 
         public void UpdateListBox()
         {
+            List<InventoryItem> SearchResults = new List<InventoryItem>();
+            Sanatizers sanatizer = new Sanatizers();
+            string searchTerms = sanatizer.Sanatize(txtSearch.Text);
+            if (string.IsNullOrEmpty(searchTerms))
+            {
+                SearchResults = AllInventoryItems.ToList();
+            }
+            else
+            {
+                InventoryItemSearcher searcher = new InventoryItemSearcher();
+                SearchResults = searcher.Search(AllInventoryItems.ToList(), searchTerms);
+            }
+
             lstInventory.Items.Clear();
             DisplayedItemsWithIndex.Clear();
 
             int index = 0;
-            foreach (InventoryItem item in AllInventoryItems)
+            foreach (InventoryItem item in SearchResults)
             {
                 lstInventory.Items.Add(InventoryItemToListViewItem(item));
                 DisplayedItemsWithIndex.Add(index, item);
                 index++;
             }
+            lblTotalItemsValue.Text = SearchResults.Count.ToString();
         }
         private ListViewItem InventoryItemToListViewItem(InventoryItem item)
         {
@@ -80,7 +94,8 @@ namespace inventory
                     {
                         btnEditItem.Enabled = true;
                         btnRemoveItem.Enabled = true;
-                    }
+                    }                   
+                    
                 }
             }
         }
@@ -157,30 +172,8 @@ namespace inventory
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            Sanatizers sanatizer = new Sanatizers();
-            string manufacturer = sanatizer.Sanatize(txtManufacturer.Text);
-            string modelnumber = sanatizer.Sanatize(txtModelNumber.Text);
-            string serialnumber = sanatizer.Sanatize(txtSerialNumber.Text);
-            string barcode = sanatizer.Sanatize(txtBarcode.Text);
-            string description = sanatizer.Sanatize(txtDescription.Text);
-            decimal cost = Parsers.ParseDecimal(sanatizer.Sanatize(txtCost.Text));
-            decimal price = Parsers.ParseDecimal(sanatizer.Sanatize(txtPrice.Text));
-
-            InventoryItem newItem = new InventoryItem()
-            {
-                Manufacturer = manufacturer,
-                ModelNumber = modelnumber,
-                SerialNumber = serialnumber,
-                Barcode = barcode,
-                Description = description,
-                Cost = cost,
-                Price = price
-                
-            };
-            AllInventoryItems.Add(newItem);
-            ClearTextBoxes();
-            UpdateListBox();
-            
+            AddItem AddItemForm = new AddItem();
+            AddItemForm.Show(this);
         }
 
         private void btnEditItem_Click(object sender, EventArgs e)
@@ -203,17 +196,23 @@ namespace inventory
                 UpdateListBox();
             }
         }
-
-        private void ClearTextBoxes()
+        
+        public bool AddInventoryItem(InventoryItem item)
         {
-            txtBarcode.Text = "";
-            txtCost.Text = "";
-            txtDescription.Text = "";
-            txtManufacturer.Text = "";
-            txtModelNumber.Text = "";
-            txtPrice.Text = "";
-            txtSerialNumber.Text = "";
-            
+            if (AllInventoryItems == null)
+            {
+                return false;
+            }
+            else
+            {
+                AllInventoryItems.Add(item);
+                return true;
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            UpdateListBox();
         }
     } //class
 } //namespace
